@@ -66,7 +66,10 @@ else
 		send ^c
 		clipwait
 		send ^t
-		clipboard=%clipboard%?nodup=true
+		if(InStr(clipboard, "?")=-1)
+			clipboard=%clipboard%?nodup=true
+		else
+			clipboard=%clipboard%&nodup=true
 		sleep 30
 		send ^v
 		sleep 30
