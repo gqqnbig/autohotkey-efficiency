@@ -62,7 +62,7 @@ if (a_cursor="IBeam")
 else
 {
 	WinGet, path, ProcessPath, A
-	if(InStr(path, "chrome.exe")-1+10=StrLen(path)) ;chrome里复制当前标签
+	if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 	{
 		clipboard=
 		send {F6}
@@ -70,7 +70,7 @@ else
 		send ^c
 		clipwait
 		send ^t
-		if(InStr(clipboard, "?")=-1)
+		if(InStr(clipboard, "?")==0)
 			clipboard=%clipboard%?nodup=true
 		else
 			clipboard=%clipboard%&nodup=true
