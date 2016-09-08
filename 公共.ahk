@@ -1,5 +1,14 @@
-﻿; alt+shift+contrl+c 关闭标签或窗口
-!+^C UP::
+﻿
+
+recentlyClosed:=false
+
+; alt+shift+contrl+c 关闭标签或窗口
+!+^C:: ;约从Chrome 53开始，alt+shift+control+c容易被Chrome先捕获，AutoHotKey后捕获UP事件，造成shift粘滞的现象。
+if(recentlyClosed)
+    return
+else
+   recentlyClosed:=true
+SetTimer, ResetRecentlyClosed, -500
 WinGet, processName, ProcessName, A
 WinGetActiveTitle, winTitle
 ;一个等号是不区分大小写的比较
@@ -17,6 +26,10 @@ else if(ProcessName="Lingoes64.exe"|| ProcessName="Lingoes.exe")
 	send {Esc}
 else 
 	WinClose, A
+return
+
+ResetRecentlyClosed:
+  recentlyClosed:=false
 return
 
 ;alt+Windows+h 上一标签页
