@@ -13,7 +13,7 @@ fileMapping:={} ;键是结尾部分的路径,值是匹配的全路径数组
 ^!F12::
 WinGet, processName, ProcessName, A
 WinGetActiveTitle, winTitle
-if(ProcessName="chrome.exe" || ProcessName="iexplore.exe") ;=总是忽略大小写
+if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefox.exe") ;=总是忽略大小写
 {
 	if(InStr(winTitle,"[Code Map]")>0)
 	{
