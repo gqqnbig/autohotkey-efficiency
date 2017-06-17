@@ -7,6 +7,7 @@ StringCaseSense Off
 Include 公共.ahk
 
 vsPath:="C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
+;如果全局声明出现在任何函数的外面, 默认情况下它可以对所有函数有效
 
 fileMapping:={} ;键是结尾部分的路径,值是匹配的全路径数组
 
