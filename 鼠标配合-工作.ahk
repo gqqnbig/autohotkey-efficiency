@@ -1,14 +1,14 @@
-#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 StringCaseSense Off
 
-Include 公共.ahk
-
 vsPath:="C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
+;如果全局声明出现在任何函数的外面, 默认情况下它可以对所有函数有效
 
-fileMapping:={} ;键是结尾部分的路径,值是匹配的全路径数组
+rootPathes:=[]
+#Include 公共.ahk
 
 ^!F12::
 WinGet, processName, ProcessName, A
@@ -101,7 +101,8 @@ else
 	StringGetPos, p, partialPath, /
 	if(p==-1) ;是自定义控件
 	{
-		extension:=partialPath ".vb"
+		partialPath:=partialPath ".vb"
+		extension:=".vb"
 	}
 	else
 	{
@@ -113,38 +114,35 @@ else
 		extension:=SubStr(partialPath, p+2)
 	}
 
-	arr:=fileMapping[partialPath]
-	if(arr)
+
+	if(!StartsWith(partialPath,"\"))
+		partialPath:= "\" partialPath
+
+	Loop % rootPathes.MaxIndex()
 	{
-		TrayTip, Found in cache, %partialPath%, 1
-		For index,value in arr
+		path:=rootPathes[A_Index] partialPath
+		if(FileExist(path))
 		{
-			;debugValue:=SubStr(value,30)
-			;ListVars
-			;pause
-			;SoundBeep 
-			run %vsPath% /edit %value%
+			TrayTip, Found in cache, %partialPath%, 1
+			run %vsPath% /edit %path%
+			return
 		}
-		return
 	}
+
 	
-	fileMapping[partialPath]:={}
-	
+	; CursorHandle := DllCall( "LoadCursor", Uint,0, Int,32514) ;等待光标
 	TrayTip, Searching..., Searching..., 1
 	Loop, C:\LoansPQ2\*%extension%, 0, 1
 	{
-		StringGetPos, p, A_LoopFileFullPath, %partialPath%
-		if(p>-1)
+		if(EndsWith(A_LoopFileFullPath, partialPath))
 		{
-			; MsgBox, 4, , Open %A_LoopFileFullPath% ?
-			; IfMsgBox, Yes
-			; {
-				fileMapping[partialPath].Insert(A_LoopFileFullPath)
-				run %vsPath% /edit %A_LoopFileFullPath%
-				TrayTip, Send to VS, %A_LoopFileFullPath%, 1
-				;CursorHandle := DllCall( "LoadCursor", Uint,0, Int,32512) 
-				;return
-			; }
+			StringGetPos, p, A_LoopFileFullPath, %partialPath%, R
+			rootPath:=SubStr(A_LoopFileFullPath, 1, p) ; 规定路径要以\结尾
+			;MsgBox, %rootPath%
+
+			rootPathes.Insert(rootPath)
+			run %vsPath% /edit %A_LoopFileFullPath%
+			TrayTip, Send to VS, %A_LoopFileFullPath%, 1
 		}
 	}
 	;ListVars
@@ -161,3 +159,9 @@ send ^[
 send ^s
 send {down}
 return
+
+
+StartsWith(longText, value)
+{
+	return InStr(longText, value)=1
+}

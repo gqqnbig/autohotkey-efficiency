@@ -24,6 +24,8 @@ else if (ProcessName="chrome.exe")
 	send ^w
 else if(ProcessName="Lingoes64.exe"|| ProcessName="Lingoes.exe")
 	send {Esc}
+else if (ProcessName="BCompare.exe")
+	send ^w
 else 
 	WinClose, A
 return
@@ -56,14 +58,19 @@ return
 
 ;windows+contrl+y 复制/获取副本命令
 ^#y UP::
-if (a_cursor="IBeam")
+WinGet, path, ProcessPath, A
+if (EndsWith(path,"BCompare.exe"))
+{
+	sleep 30
+	send ^n
+}
+else if (a_cursor="IBeam")
 {
 	sleep 30
 	send ^c
 }
 else
 {
-	WinGet, path, ProcessPath, A
 	if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 	{
 		clipboard=
