@@ -67,7 +67,7 @@ else
 	if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 	{
 		clipboard=
-		send {F6}
+		send !d
 		sleep 30
 		send ^c
 		clipwait
