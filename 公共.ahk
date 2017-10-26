@@ -19,7 +19,13 @@ else if (ProcessName="devenv.exe")
 else if (winTitle="F12" && ProcessName="iexplore.exe")
 	send {F10}
 else if (InStr(winTitle, "Developer Tool")==1 && ProcessName="chrome.exe")
-	send {F10}
+{
+	PixelGetColor, color, 351,62 ;Source标签页的底线
+	if(color="0xF7823E")
+		send {F10}
+	else
+		WinClose, A
+}
 else if (ProcessName="chrome.exe")
 	send ^w
 else if(ProcessName="Lingoes64.exe"|| ProcessName="Lingoes.exe")
