@@ -132,6 +132,7 @@ else
 	
 	; CursorHandle := DllCall( "LoadCursor", Uint,0, Int,32514) ;等待光标
 	TrayTip, Searching..., Searching..., 1
+	count:=0
 	Loop, C:\LoansPQ2\*%extension%, 0, 1
 	{
 		if(EndsWith(A_LoopFileFullPath, partialPath))
@@ -143,8 +144,12 @@ else
 			rootPathes.Insert(rootPath)
 			run %vsPath% /edit %A_LoopFileFullPath%
 			TrayTip, Send to VS, %A_LoopFileFullPath%, 1
+			count++
 		}
 	}
+	if(count==0)
+		TrayTip, Not Found, %partialPath%, 1
+
 	;ListVars
 	;MsgBox, No more findings.
 	; CursorHandle := DllCall( "LoadCursor", Uint,0, Int,32512)
