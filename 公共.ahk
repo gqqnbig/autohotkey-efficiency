@@ -17,7 +17,13 @@ if (ProcessName="eclipse.exe") ;在编程环境中是单步跳过
 else if (ProcessName="devenv.exe")
 	send {F10}
 else if (winTitle="F12" && ProcessName="iexplore.exe")
-	send {F10}
+{
+	PixelGetColor, color, 251,34
+	if(color="0xFFFFFF")
+		send {F10}
+	else
+		WinClose, A
+}
 else if (InStr(winTitle, "Developer Tool")==1 && ProcessName="chrome.exe")
 	send {F10}
 else if (ProcessName="chrome.exe")
