@@ -104,6 +104,7 @@ else
 	if(!StartsWith(partialPath,"\"))
 		partialPath:= "\" partialPath
 
+	found:=false
 	Loop % rootPathes.MaxIndex()
 	{
 		path:=rootPathes[A_Index] partialPath
@@ -111,9 +112,11 @@ else
 		{
 			TrayTip, Found in cache, %partialPath%, 1
 			run %vsPath% /edit %path%
-			return
+			found:=true
 		}
 	}
+	if(found)
+		return
 
 	
 	; CursorHandle := DllCall( "LoadCursor", Uint,0, Int,32514) ;等待光标
