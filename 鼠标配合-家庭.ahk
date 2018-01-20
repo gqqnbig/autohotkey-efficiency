@@ -24,9 +24,9 @@ return
 ;windows+contrl+v 用vim打开当前光标下的文件
 #IfWinActive ahk_class CabinetWClass
 ^#v UP::
-send +{RButton}
+SendInput +{RButton}
 sleep 50
-send a
+SendInput a
 sleep 50
 path:=substr(clipboard,2,-1)
 IfExist, %path%
@@ -45,20 +45,20 @@ return
 ^F11 UP::
 Loop, 9
 {
-    send {WheelUp}
+    SendInput {WheelUp}
     sleep 20
 }
-send {WheelUp}
+SendInput {WheelUp}
 return
  
 ;contrl+F12 一次向下滚10次
 ^F12 UP::
 Loop, 9
 {
-    send {WheelDown}
+    SendInput {WheelDown}
     sleep 20
 }
-send {WheelDown}
+SendInput {WheelDown}
 return
 
 

@@ -17,7 +17,7 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 {
 	if(InStr(winTitle,"[Code Map]")>0)
 	{
-		send ^c
+		SendInput ^c
 		sleep 30
 		if(FileExist(Clipboard))
 			run %vsPath% /edit %Clipboard%
@@ -34,9 +34,9 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 		}
 		else
 		{
-			send !d
+			SendInput !d
 			sleep 30
-			send ^c
+			SendInput ^c
 			sleep 30
 		}
 		; 提取相对路径
@@ -80,7 +80,7 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 }
 else
 {
-	send ^c
+	SendInput ^c
 	sleep 30
 	partialPath:=Clipboard
 	
@@ -166,11 +166,11 @@ return
  
 
 ^l::
-send ^`;
-send {Backspace}
-send ^[
-send ^s
-send {down}
+SendInput ^`;
+SendInput {Backspace}
+SendInput ^[
+SendInput ^s
+SendInput {down}
 return
 
 
