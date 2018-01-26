@@ -40,40 +40,26 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 			sleep 30
 		}
 		; 提取相对路径
-		p:=0
-		StringGetPos, p1, Clipboard, loanspq.localhost
-		if(p1>-1)
+
+
+		regP:=RegExMatch(Clipboard, "P)//((beta|demo|\w\w)\.loanspq\.com|loanspq\.localhost)", matchLength)
+		if(regP>0)
 		{
-			p:=p1
-			StringGetPos, p, Clipboard, /, L3
-			p:=p+1
-			filePath:="website" SubStr(Clipboard, p)
+			filePathIndex:=regP+matchLength
+			filePath:="Website" SubStr(Clipboard, filePathIndex)
 			Goto, foundPath
 		}
 
-		StringGetPos, p1, Clipboard, beta.loanspq.com
-		if(p1>-1)
+		regP:=RegExMatch(Clipboard, "P)//svn\.loanspq.com.+Trunk/LoansPQ2", matchLength)
+		if(regP>0)
 		{
-			p:=p1
-			StringGetPos, p, Clipboard, /, L3
-			p:=p+1
-			filePath:="website" SubStr(Clipboard, p)
+			filePathIndex:=regP+matchLength
+			filePath:= SubStr(Clipboard, filePathIndex)
 			Goto, foundPath
 		}
-
-		StringGetPos, p1, Clipboard, svn.loanspq.com
-		if(p1>-1)
-		{
-			StringGetPos, p1, Clipboard, Trunk/LoansPQ2
-			p:=p1+14+2
-			filePath:=SubStr(Clipboard, p)
-			Goto, foundPath
-		}
-		else
-			return
+		return
 
 		foundPath:
-		;MsgBox %filePath%
 
 		; 去掉#
 		StringGetPos, p, filePath, #
