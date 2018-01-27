@@ -7,8 +7,8 @@ StringCaseSense, off
 
 #include 公共.ahk
 
-; alt+shift+control+b 打开B盘
-!+^B:: Run B:\
+; window+control+b 打开B盘
+#^b:: Run B:\
 
 ;windows+contrl+v 用vim打开当前光标下的文件
 #IfWinActive ahk_class CabinetWClass
