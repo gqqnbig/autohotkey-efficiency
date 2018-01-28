@@ -8,7 +8,18 @@ StringCaseSense, off
 #include 公共.ahk
 
 ; window+control+b 打开B盘
-#^b:: Run B:\
+#^b::
+Process, Exist, dopus.exe
+if(ErrorLevel=0)
+    Run B:\
+else
+{
+    fullPath := GetModuleFileNameEx(ErrorLevel)
+    SplitPath, fullPath, , folderPath, 
+    Run %folderPath%\dopusrt.exe  /acmd Go "B:\" NEWTAB=findexisting`,tofront
+}
+return
+
 
 ;windows+contrl+v 用vim打开当前光标下的文件
 #IfWinActive ahk_class CabinetWClass
@@ -49,3 +60,28 @@ Loop, 9
 }
 send {WheelDown}
 return
+
+
+
+GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic.php?t=9000
+{
+   if A_OSVersion in WIN_95,WIN_98,WIN_ME
+   {
+      MsgBox, This Windows version (%A_OSVersion%) is not supported.
+      return
+   }
+
+   h_process := DllCall( "OpenProcess", "uint", 0x10|0x400, "int", false, "uint", p_pid )
+   if ( ErrorLevel or h_process = 0 )
+      return
+
+   name_size = 255
+   VarSetCapacity( name, name_size )
+
+   result := DllCall( "psapi.dll\GetModuleFileNameEx" ( A_IsUnicode ? "W" : "A" )
+                 , "uint", h_process, "uint", 0, "str", name, "uint", name_size )
+
+   DllCall( "CloseHandle", h_process )
+
+   return, name
+}
