@@ -11,6 +11,14 @@ else
 SetTimer, ResetRecentlyClosed, -500
 WinGet, processName, ProcessName, A
 WinGetActiveTitle, winTitle
+
+WinGet, pid, PID, A
+if(A_IsAdmin==false && IsProcessElevated(pid))
+{
+	TrayTip, No Operation, Target window elevated. AutoHotKey is not going to work., 1
+	return
+}
+
 ;一个等号是不区分大小写的比较
 if (ProcessName="eclipse.exe") ;在编程环境中是单步跳过
 	send {F10}
@@ -43,7 +51,13 @@ return
 ;alt+Windows+l 下一标签页
 !#l:: 
 WinGet, processName, ProcessName, A
-;VarSetCapacity(winTitle, 255)
+
+WinGet, pid, PID, A
+if(A_IsAdmin==false && IsProcessElevated(pid))
+{
+	TrayTip, No Operation, Target window elevated. AutoHotKey is not going to work., 1
+	return
+}
 WinGetActiveTitle, winTitle
 if (ProcessName=="eclipse.exe") ;在编程环境中是单步进入
 	send {F11}
@@ -106,3 +120,27 @@ EndsWith(longText, value)
 	return InStr(longText, value)-1+StrLen(value)=StrLen(longText)
 }
 
+;1:elevated
+;0:not elevated
+;-1:error (probably elevated)
+; From https://autohotkey.com/boards/viewtopic.php?p=197426#p197426
+IsProcessElevated(vPID)
+{
+	;PROCESS_QUERY_LIMITED_INFORMATION := 0x1000
+	if !(hProc := DllCall("kernel32\OpenProcess", UInt,0x1000, Int,0, UInt,vPID, Ptr))
+		return -1
+	;TOKEN_QUERY := 0x8
+	hToken:=0
+	if !(DllCall("advapi32\OpenProcessToken", Ptr,hProc, UInt,0x8, PtrP,hToken))
+	{
+		DllCall("kernel32\CloseHandle", Ptr,hProc)
+		return -1
+	}
+	;TokenElevation := 20
+	vIsElevated:=0
+	vSize:=0
+	vRet := (DllCall("advapi32\GetTokenInformation", Ptr,hToken, Int,20, UIntP,vIsElevated, UInt,4, UIntP,vSize))
+	DllCall("kernel32\CloseHandle", Ptr,hToken)
+	DllCall("kernel32\CloseHandle", Ptr,hProc)
+	return vRet ? vIsElevated : -1
+}
