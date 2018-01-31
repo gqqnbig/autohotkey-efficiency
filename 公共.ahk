@@ -19,7 +19,7 @@ if(A_IsAdmin==false && IsProcessElevated(pid))
 	return
 }
 
-;一个等号是不区分大小写的比较
+;一个等号是不区分大小写的比较 https://autohotkey.com/docs/Variables.htm#operators
 if (ProcessName="eclipse.exe") ;在编程环境中是单步跳过
 	send {F10}
 else if (ProcessName="devenv.exe")
