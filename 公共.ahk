@@ -20,9 +20,7 @@ if(A_IsAdmin==false && IsProcessElevated(pid))
 }
 
 ;一个等号是不区分大小写的比较 https://autohotkey.com/docs/Variables.htm#operators
-if (ProcessName="eclipse.exe") ;在编程环境中是单步跳过
-	send {F10}
-else if (ProcessName="devenv.exe")
+if (ProcessName="devenv.exe") ;在编程环境中是单步跳过
 	send {F10}
 else if (winTitle="F12" && ProcessName="iexplore.exe")
 	send {F10}
@@ -34,6 +32,8 @@ else if(ProcessName="Lingoes64.exe"|| ProcessName="Lingoes.exe")
 	send {Esc}
 else if (ProcessName="BCompare.exe")
 	send ^w
+else if (ProcessName="eclipse.exe")
+	send {F10}
 else 
 	WinClose, A
 return
@@ -59,9 +59,10 @@ if(A_IsAdmin==false && IsProcessElevated(pid))
 	return
 }
 WinGetActiveTitle, winTitle
-if (ProcessName=="eclipse.exe") ;在编程环境中是单步进入
+
+if (ProcessName=="devenv.exe") ;在编程环境中是单步进入
 	send {F11}
-else if (ProcessName=="devenv.exe")
+else if (ProcessName=="eclipse.exe")
 	send {F11}
 else
 	send ^{tab}
