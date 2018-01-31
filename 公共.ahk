@@ -28,7 +28,7 @@ else if (winTitle="F12" && ProcessName="iexplore.exe")
 	send {F10}
 else if (InStr(winTitle, "Developer Tool")==1 && ProcessName="chrome.exe")
 	send {F10}
-else if (ProcessName="chrome.exe")
+else if (ProcessName="chrome.exe" || ProcessName="iexplore.exe")
 	send ^w
 else if(ProcessName="Lingoes64.exe"|| ProcessName="Lingoes.exe")
 	send {Esc}
