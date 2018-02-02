@@ -141,6 +141,30 @@ else
 return
  
 
+^!F11::
+IfWinActive ahk_exe chrome.exe
+{
+	send ^I
+	return
+}
+IfWinActive ahk_exe firefox.exe
+{
+   send ^I
+   return
+}
+IfWinActive ahk_exe devenv.exe
+{
+   send ^l
+   return
+}
+IfWinActive ahk_exe iexplore.exe
+{
+   send {F12}
+   return
+}
+return
+ 
+
 ^l::
 send ^`;
 send {Backspace}
