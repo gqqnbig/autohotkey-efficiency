@@ -15,7 +15,7 @@ WinGetActiveTitle, winTitle
 WinGet, pid, PID, A
 if(A_IsAdmin==false && IsProcessElevated(pid))
 {
-	TrayTip, No Operation, Target window elevated. AutoHotKey is not going to work., 1
+	TrayTip, 无法操作, 目标窗口具有管理员权限，而本脚本不具有管理员权限, 1
 	return
 }
 
@@ -55,7 +55,7 @@ WinGet, processName, ProcessName, A
 WinGet, pid, PID, A
 if(A_IsAdmin==false && IsProcessElevated(pid))
 {
-	TrayTip, No Operation, Target window elevated. AutoHotKey is not going to work., 1
+	TrayTip, 无法操作, 目标窗口具有管理员权限，而本脚本不具有管理员权限, 1
 	return
 }
 WinGetActiveTitle, winTitle
