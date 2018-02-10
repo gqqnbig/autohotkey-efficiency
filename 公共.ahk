@@ -88,7 +88,7 @@ else
 {
 	if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 	{
-		clipboard=
+		clipboard:=""
 		SendInput {F6}
 		sleep 30
 		SendInput ^c
@@ -96,10 +96,10 @@ else
 		SendInput ^t
 		if(InStr(clipboard, "?")==0)
 		{
-			clipboard=%clipboard%?nodup=true
+			clipboard:= clipboard "?nodup=true"
 		}
 		else
-			clipboard=%clipboard%&nodup=true
+			clipboard:= clipboard "&nodup=true"
 		sleep 30
 		SendInput ^v
 		sleep 30

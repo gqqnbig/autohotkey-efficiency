@@ -28,7 +28,7 @@ GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic
    if ( ErrorLevel or h_process = 0 )
       return
 
-   name_size = 255
+   name_size:= 255
    VarSetCapacity( name, name_size )
 
    result := DllCall( "psapi.dll\GetModuleFileNameEx" ( A_IsUnicode ? "W" : "A" )
