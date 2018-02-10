@@ -8,34 +8,34 @@ if(recentlyClosed)
     return
 else
    recentlyClosed:=true
-SetTimer, ResetRecentlyClosed, -500
-WinGet, processName, ProcessName, A
-WinGetActiveTitle, winTitle
+SetTimer "ResetRecentlyClosed", -500
+ProcessName:=WinGetProcessName("A")
+winTitle:=WinGetTitle("A") 
 
-WinGet, pid, PID, A
+pid:=WinGetPID("A")
 if(A_IsAdmin==false && IsProcessElevated(pid))
 {
-	TrayTip, 无法操作, 目标窗口具有管理员权限，而本脚本不具有管理员权限, 1
+	TrayTip "无法操作", "目标窗口具有管理员权限，而本脚本不具有管理员权限", 1
 	return
 }
 
 ;一个等号是不区分大小写的比较 https://autohotkey.com/docs/Variables.htm#operators
 if (ProcessName="devenv.exe") ;在编程环境中是单步跳过
-	SendInput {F10}
+	SendInput "{F10}"
 else if (winTitle="F12" && ProcessName="iexplore.exe")
-	SendInput {F10}
+	SendInput "{F10}"
 else if (InStr(winTitle, "Developer Tool")==1 && ProcessName="chrome.exe")
-	SendInput {F10}
+	SendInput "{F10}"
 else if (ProcessName="chrome.exe" || ProcessName="iexplore.exe")
-	SendInput ^w
+	SendInput "^w"
 else if(ProcessName="Lingoes64.exe"|| ProcessName="Lingoes.exe")
-	SendInput {Esc}
+	SendInput "{Esc}"
 else if (ProcessName="BCompare.exe")
-	SendInput ^w
+	SendInput "^w"
 else if (ProcessName="eclipse.exe")
-	SendInput {F10}
+	SendInput "{F10}"
 else 
-	WinClose, A
+	WinClose "A"
 return
 
 ResetRecentlyClosed:
@@ -43,57 +43,57 @@ ResetRecentlyClosed:
 return
 
 ;alt+Windows+h 上一标签页
-!#h:: SendInput ^+{tab}
+!#h:: SendInput "^+{tab}"
 
 ;control+alt+Windows+h 历史记录中的上一页
-^!#h:: SendInput !{left}
+^!#h:: SendInput "!{left}"
 
 ;alt+Windows+l 下一标签页
 !#l:: 
-WinGet, processName, ProcessName, A
+ProcessName:=WinGetProcessName("A")
 
-WinGet, pid, PID, A
+pid:=WinGetPID("A")
 if(A_IsAdmin==false && IsProcessElevated(pid))
 {
-	TrayTip, 无法操作, 目标窗口具有管理员权限，而本脚本不具有管理员权限, 1
+	TrayTip "无法操作", "目标窗口具有管理员权限，而本脚本不具有管理员权限", 1
 	return
 }
-WinGetActiveTitle, winTitle
+winTitle:=WinGetTitle("A")
 
 if (ProcessName=="devenv.exe") ;在编程环境中是单步进入
-	SendInput {F11}
+	SendInput "{F11}"
 else if (ProcessName=="eclipse.exe")
-	SendInput {F11}
+	SendInput "{F11}"
 else
-	SendInput ^{tab}
+	SendInput "^{tab}"
 return
 
 ;control+alt+Windows+l 历史记录中的下一页
-^!#l:: SendInput !{right}
+^!#l:: SendInput "!{right}"
 
 ;windows+contrl+y 复制/获取副本命令
 ^#y UP::
-WinGet, path, ProcessPath, A
+path:=WinGetProcessPath "A"
 if (EndsWith(path,"BCompare.exe"))
 {
 	sleep 30
-	SendInput ^n
+	SendInput "^n"
 }
 else if (a_cursor="IBeam")
 {
 	sleep 30
-	SendInput ^c
+	SendInput "^c"
 }
 else
 {
 	if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 	{
 		clipboard:=""
-		SendInput {F6}
+		SendInput "{F6}"
 		sleep 30
-		SendInput ^c
+		SendInput "^c"
 		clipwait
-		SendInput ^t
+		SendInput "^t"
 		if(InStr(clipboard, "?")==0)
 		{
 			clipboard:= clipboard "?nodup=true"
@@ -101,17 +101,17 @@ else
 		else
 			clipboard:= clipboard "&nodup=true"
 		sleep 30
-		SendInput ^v
+		SendInput "^v"
 		sleep 30
-		SendInput {enter}
+		SendInput "{enter}"
 	}
 	else if(EndsWith(path,"explorer.exe"))
 	{
 		sleep 50
-		SendInput ^n
+		SendInput "^n"
 	}
 	else
-		run %path%
+		run path
 }
 return
 

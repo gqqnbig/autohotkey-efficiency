@@ -1,22 +1,20 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-#Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+﻿#Warn  ; Enable warnings to assist with detecting common errors.
+SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
 
-StringCaseSense, off
+StringCaseSense "off"
 
 #include 公共.ahk
 
 ; window+control+b 打开B盘
 #^b::
-Process, Exist, dopus.exe
-if(ErrorLevel=0)
-    Run B:\
+pid:=ProcessExist("dopus.exe")
+if(pid==0)
+    Run "B:\"
 else
 {
-    fullPath := GetModuleFileNameEx(ErrorLevel)
-    SplitPath, fullPath, , folderPath, 
-    Run %folderPath%\dopusrt.exe  /acmd Go "B:\" NEWTAB=findexisting`,tofront
+    fullPath := GetModuleFileNameEx(pid)
+    SplitPath fullPath, , folderPath, 
+    Run folderPath "\dopusrt.exe  /acmd Go B:\ NEWTAB=findexisting`,tofront"
 }
 return
 
@@ -37,5 +35,5 @@ GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic
 
    DllCall( "CloseHandle", "uint", h_process )
 
-   return, name
+   return name
 }
