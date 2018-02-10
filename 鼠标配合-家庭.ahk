@@ -21,48 +21,6 @@ else
 return
 
 
-;windows+contrl+v 用vim打开当前光标下的文件
-#IfWinActive ahk_class CabinetWClass
-^#v UP::
-SendInput +{RButton}
-sleep 50
-SendInput a
-sleep 50
-path:=substr(clipboard,2,-1)
-IfExist, %path%
-{
-    run "C:\Program Files (x86)\Vim\vim74\gvim.exe" %clipboard%
-}
-else
-{
-    SoundPlay, *48
-}
-return
-#If
- 
- 
-;contrl+F11 一次向上滚10次
-^F11 UP::
-Loop, 9
-{
-    SendInput {WheelUp}
-    sleep 20
-}
-SendInput {WheelUp}
-return
- 
-;contrl+F12 一次向下滚10次
-^F12 UP::
-Loop, 9
-{
-    SendInput {WheelDown}
-    sleep 20
-}
-SendInput {WheelDown}
-return
-
-
-
 GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic.php?t=9000
 {
 
