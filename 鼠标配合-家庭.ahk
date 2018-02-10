@@ -35,7 +35,7 @@ GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic
    result := DllCall( "psapi.dll\GetModuleFileNameEx" ( A_IsUnicode ? "W" : "A" )
                  , "uint", h_process, "uint", 0, "str", name, "uint", name_size )
 
-   DllCall( "CloseHandle", h_process )
+   DllCall( "CloseHandle", "uint", h_process )
 
    return, name
 }
