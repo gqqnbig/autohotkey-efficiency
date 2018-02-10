@@ -23,6 +23,7 @@ return
 
 GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic.php?t=9000
 {
+   local h_process, name_size, result, name
 
    h_process := DllCall( "OpenProcess", "uint", 0x10|0x400, "int", false, "uint", p_pid )
    if ( ErrorLevel or h_process = 0 )
