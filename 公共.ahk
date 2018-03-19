@@ -114,6 +114,8 @@ return
 ; 如果longText以value结尾，则返回1；否则返回0。
 EndsWith(longText, value)
 {
+	if(InStr(longText, value)=0)
+		return 0
 	return InStr(longText, value)-1+StrLen(value)=StrLen(longText)
 }
 
