@@ -1,4 +1,5 @@
-﻿
+﻿SetKeyDelay 30
+
 
 recentlyClosed:=false
 
@@ -76,12 +77,10 @@ return
 path:=WinGetProcessPath "A"
 if (EndsWith(path,"BCompare.exe"))
 {
-	sleep 30
 	SendInput "^n"
 }
 else if (a_cursor="IBeam")
 {
-	sleep 30
 	SendInput "^c"
 }
 else
@@ -90,7 +89,6 @@ else
 	{
 		clipboard:=""
 		SendInput "{F6}"
-		sleep 30
 		SendInput "^c"
 		clipwait
 		SendInput "^t"
@@ -100,9 +98,7 @@ else
 		}
 		else
 			clipboard:= clipboard "&nodup=true"
-		sleep 30
 		SendInput "^v"
-		sleep 30
 		SendInput "{enter}"
 	}
 	else if(EndsWith(path,"explorer.exe"))
