@@ -118,23 +118,19 @@ else
 
 	
 	; CursorHandle := DllCall( "LoadCursor", Uint,0, Int,32514) ;等待光标
-	TrayTip("Searching...")
+	TrayTip("Searching..." partialPath)
 	Loop Files, "C:\LoansPQ2\*" extension, "FR"
 	{
 		if(EndsWith(A_LoopFileFullPath, partialPath))
 		{
 			p:=InStr(A_LoopFileFullPath, partialPath, ,-1)
 			rootPath:=SubStr(A_LoopFileFullPath, 1, p) ; 规定路径要以\结尾
-			;MsgBox, %rootPath%
 
 			rootPathes.Push(rootPath)
 			run(vsPath " /edit " A_LoopFileFullPath)
 			TrayTip(A_LoopFileFullPath,"Send to VS",  1)
 		}
 	}
-	;ListVars
-	;MsgBox, No more findings.
-	; CursorHandle := DllCall( "LoadCursor", Uint,0, Int,32512)
 }
 return
  
