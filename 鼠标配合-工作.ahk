@@ -83,7 +83,7 @@ else
 	partialPath:=Clipboard
 	
 	p:=InStr(partialPath, "/")
-	if(p==-1) ;是自定义控件
+	if(p==0) ;是自定义控件
 	{
 		partialPath:=partialPath ".vb"
 		extension:=".vb"
@@ -91,11 +91,11 @@ else
 	else
 	{
 		p:=InStr(partialPath, "~")
-		if(p==0)
+		if(p==1)
 			partialPath:= SubStr(partialPath, 2)
 		partialPath:=StrReplace(partialPath, "/", "\")
-		p:=InStr(partialPath, "\")
-		extension:=SubStr(partialPath, p+2)
+		p:=InStr(partialPath, "\", ,-1)
+		extension:=SubStr(partialPath, p+1)
 	}
 
 
@@ -108,7 +108,7 @@ else
 		path:=rootPathes[A_Index] partialPath
 		if(FileExist(path))
 		{
-			TrayTip("Found in cache", partialPath, 1)
+			TrayTip(partialPath, "Found in cache",1)
 			run(vsPath " /edit " path)
 			found:=true
 		}
@@ -118,18 +118,18 @@ else
 
 	
 	; CursorHandle := DllCall( "LoadCursor", Uint,0, Int,32514) ;等待光标
-	TrayTip("Searching...", 1)
-	Loop Files, "C:\LoansPQ2\*" extension, "F"
+	TrayTip("Searching...")
+	Loop Files, "C:\LoansPQ2\*" extension, "FR"
 	{
 		if(EndsWith(A_LoopFileFullPath, partialPath))
 		{
-			p:=InStr(A_LoopFileFullPath, partialPath, -1)
+			p:=InStr(A_LoopFileFullPath, partialPath, ,-1)
 			rootPath:=SubStr(A_LoopFileFullPath, 1, p) ; 规定路径要以\结尾
 			;MsgBox, %rootPath%
 
-			rootPathes.Insert(rootPath)
+			rootPathes.Push(rootPath)
 			run(vsPath " /edit " A_LoopFileFullPath)
-			TrayTip("Send to VS", A_LoopFileFullPath, 1)
+			TrayTip(A_LoopFileFullPath,"Send to VS",  1)
 		}
 	}
 	;ListVars
