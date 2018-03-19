@@ -40,15 +40,15 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 		; 提取相对路径
 
 
-		regP:=RegExMatch(Clipboard, "P)//((beta|demo|\w\w)\.loanspq\.com|loanspq\.localhost)", matchLength)
+		regP:=RegExMatch(Clipboard, "//((beta|demo|\w\w)\.loanspq\.com|loanspq\.localhost)", matchLength)
 		if(regP>0)
 		{
-			filePathIndex:=regP+matchLength
+			filePathIndex:=regP+matchLength.Len(0)
 			filePath:="Website" SubStr(Clipboard, filePathIndex)
 			Goto("foundPath")
 		}
 
-		regP:=RegExMatch(Clipboard, "P)//svn\.loanspq.com.+Trunk/LoansPQ2", matchLength)
+		regP:=RegExMatch(Clipboard, "//svn\.loanspq.com.+Trunk/LoansPQ2", matchLength)
 		if(regP>0)
 		{
 			filePathIndex:=regP+matchLength
@@ -61,17 +61,17 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 
 		; 去掉#
 		p:=InStr(filePath, "#")
-		if(p>-1)
-			filePath:= SubStr(filePath, 1, p)
+		if(p>0)
+			filePath:= SubStr(filePath, 1, p-1)
 
 		; 去掉?查询字符
 		p2:=InStr(filePath, "?")
-		if(p2>-1)
-			filePath:= "C:\LoansPQ2\" SubStr(filePath, 1, p2)
+		if(p2>0)
+			filePath:= "C:\LoansPQ2\" SubStr(filePath, 1, p2-1)
 		else
 			filePath:= "C:\LoansPQ2\" filePath
 		if(FileExist(filePath))
-			run %vsPath% /edit %filePath%
+			run(vsPath " /edit " filePath)
 		else
 			SoundBeep 
 	}
