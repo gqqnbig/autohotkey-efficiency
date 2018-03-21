@@ -51,7 +51,7 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 		regP:=RegExMatch(Clipboard, "//svn\.loanspq.com.+Trunk/LoansPQ2", matchLength)
 		if(regP>0)
 		{
-			filePathIndex:=regP+matchLength
+			filePathIndex:=regP+matchLength.Len(0)
 			filePath:= SubStr(Clipboard, filePathIndex)
 			Goto("foundPath")
 		}
