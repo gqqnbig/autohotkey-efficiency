@@ -74,7 +74,7 @@ return
 
 ;windows+contrl+y 复制/获取副本命令
 ^#y UP::
-path:=WinGetProcessPath "A"
+path:=WinGetProcessPath("A")
 if (EndsWith(path,"BCompare.exe"))
 {
 	SendInput "^n"
