@@ -168,6 +168,15 @@ SendInput "{down}"
 return
 
 
+#If WinActive("ahk_exe devenv.exe")
+Insert::
+SendInput "!+="
+SendInput "^c"
+run "WScript.exe `"Go to control definition.vbs`" " Clipboard
+return
+#If
+
+
 StartsWith(longText, value)
 {
 	return InStr(longText, value)=1
