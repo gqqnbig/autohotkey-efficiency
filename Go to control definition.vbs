@@ -34,5 +34,5 @@ dte.UserControl = True
 
 dte.ExecuteCommand "View.ViewDesigner"
 dte.ExecuteCommand "View.ViewMarkup"
-dte.ExecuteCommand "Edit.Find", "ID=^""" & keyword & "^"" /doc"
+dte.ExecuteCommand "Edit.Find", "(?<=id\=^"")" & keyword & "(?=^"") /doc /regex"
 
