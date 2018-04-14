@@ -171,7 +171,9 @@ return
 #If WinActive("ahk_exe devenv.exe")
 Insert::
 SendInput "!+="
+sleep 30
 SendInput "^c"
+sleep 30
 run "WScript.exe `"Go to control definition.vbs`" " Clipboard
 return
 #If
