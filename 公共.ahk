@@ -83,32 +83,29 @@ else if (a_cursor="IBeam")
 {
 	SendInput "^c"
 }
-else
+else if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 {
-	if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
+	clipboard:=""
+	SendInput("{F6}")
+	SendInput "^c"
+	clipwait
+	SendInput "^t"
+	if(InStr(clipboard, "?")==0)
 	{
-		clipboard:=""
-		SendInput "{F6}"
-		SendInput "^c"
-		clipwait
-		SendInput "^t"
-		if(InStr(clipboard, "?")==0)
-		{
-			clipboard:= clipboard "?nodup=true"
-		}
-		else
-			clipboard:= clipboard "&nodup=true"
-		SendInput "^v"
-		SendInput "{enter}"
-	}
-	else if(EndsWith(path,"explorer.exe"))
-	{
-		sleep 50
-		SendInput "^n"
+		clipboard:= clipboard "?nodup=true"
 	}
 	else
-		run path
+		clipboard:= clipboard "&nodup=true"
+	SendInput "^v"
+	SendInput "{enter}"
 }
+else if(EndsWith(path,"explorer.exe"))
+{
+	sleep 50
+	SendInput "^n"
+}
+else
+	run path
 return
 
 ; 如果longText以value结尾，则返回1；否则返回0。
