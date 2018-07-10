@@ -119,6 +119,7 @@ else
 	
 	; CursorHandle := DllCall( "LoadCursor", Uint,0, Int,32514) ;等待光标
 	TrayTip("Searching..." partialPath)
+	count:=0
 	Loop Files, "C:\LoansPQ2\*" extension, "FR"
 	{
 		if(EndsWith(A_LoopFileFullPath, partialPath))
@@ -129,8 +130,12 @@ else
 			rootPathes.Push(rootPath)
 			run(vsPath " /edit " A_LoopFileFullPath)
 			TrayTip(A_LoopFileFullPath,"Send to VS",  1)
+			count++
 		}
 	}
+
+	if(count>5)
+		return
 }
 return
  
