@@ -39,10 +39,11 @@ else
 	WinClose "A"
 return
 
-ResetRecentlyClosed:
+ResetRecentlyClosed()
+{
+  global recentlyClosed
   recentlyClosed:=false
-return
-
+}
 ;alt+Windows+h 上一标签页
 !#h:: SendInput "^+{tab}"
 
