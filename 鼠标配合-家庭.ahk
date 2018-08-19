@@ -3,6 +3,8 @@ SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
 
 StringCaseSense "off"
 
+TraySetIcon("icon.ico")
+
 #include 公共.ahk
 
 ; window+control+b 打开B盘
