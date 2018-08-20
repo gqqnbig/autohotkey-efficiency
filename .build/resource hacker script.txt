@@ -1,0 +1,5 @@
+[FILENAMES]
+Exe=    "Unicode 32-bit.bin"
+SaveAs= "Unicode 32-bit.bin"
+[COMMANDS]
+-modify  "Version Info.res", VERSIONINFO,

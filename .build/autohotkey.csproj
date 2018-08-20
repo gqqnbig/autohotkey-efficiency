@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <Target Name="Build">
+	  <Exec Command="Powershell -c &quot; (Get-Content '.\Version Info.rc').replace('{build}',$env:APPVEYOR_BUILD_NUMBER) | Set-Content 'Version Info.rc' &quot;" />
+	  <Exec Command="ResourceHacker.exe -open &quot;Version Info.rc&quot; -action compile" />
+	  <Exec Command="ResourceHacker.exe -script &quot;resource hacker script.txt&quot;" />
 	  <MakeDir Directories="../bin" />
 	  <Exec Command="Ahk2Exe.exe /in ..\鼠标配合-家庭.ahk /icon ../icon.ico /bin &quot;Unicode 32-bit.bin&quot; /out ..\bin\鼠标配合-家庭.exe" />
   </Target>
