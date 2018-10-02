@@ -47,6 +47,10 @@ return
 
 #IF
 
+#If WinActive("ahk_exe PDFXCview.exe")
+a::+^f
+#If
+
 
 GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic.php?t=9000
 {
