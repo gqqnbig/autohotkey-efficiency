@@ -1,5 +1,8 @@
 # autohotkey-efficiency
 
+[![Build status](https://ci.appveyor.com/api/projects/status/0j8a5b3e6nwok4t6/branch/master?svg=true)](https://ci.appveyor.com/project/gqqnbig/autohotkey-efficiency/branch/master)
+
+
 # 常见问题
 ## Chrome浏览器提示文件有毒？
 
