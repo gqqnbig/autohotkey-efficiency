@@ -20,6 +20,33 @@ else
 }
 return
 
+#If A_Cursor=="IBeam"
+^u UP::
+Clipboard:=""
+SendEvent "^c"
+if(ClipWait(1))
+{
+	Clipboard:=StrLower(Clipboard)
+	SendText Clipboard
+}
+else
+	TrayTip "无法操作", "control+c没有把内容存入剪贴板", 17
+return
+
+^+u UP::
+Clipboard:=""
+SendEvent "^c"
+if(ClipWait(1))
+{
+	Clipboard:=StrUpper(Clipboard)
+	SendText Clipboard
+}
+else
+	TrayTip "无法操作", "control+c没有把内容存入剪贴板", 17
+return
+
+#IF
+
 
 GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic.php?t=9000
 {
