@@ -88,8 +88,19 @@ else if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 {
 	clipboard:=""
 	SendInput("{F6}")
-	SendInput "^c"
-	clipwait
+	SendEvent "^c"
+	if(!clipwait(1))
+	{
+		TrayTip "快捷键错误", "F6没有获取到标签页地址", 1
+		SendInput("!d")
+		SendEvent "^c"
+		if(!clipwait(1))
+		{
+			TrayTip "快捷键错误", "alt+d没有获取到标签页地址", 1
+			return
+		}
+	}
+
 	SendInput "^t"
 	if(InStr(clipboard, "?")==0)
 	{
@@ -97,7 +108,7 @@ else if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 	}
 	else
 		clipboard:= clipboard "&nodup=true"
-	SendInput "^v"
+	SendText clipboard
 	SendInput "{enter}"
 }
 else if(EndsWith(path,"explorer.exe"))
