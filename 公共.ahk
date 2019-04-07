@@ -31,6 +31,8 @@ else if (ProcessName="chrome.exe" || ProcessName="iexplore.exe")
 	SendInput "^w"
 else if(ProcessName="Lingoes64.exe"|| ProcessName="Lingoes.exe")
 	SendInput "{Esc}"
+else if (ProcessName="dopus.exe")
+	SendInput "^w"
 else if (ProcessName="BCompare.exe")
 	SendInput "^w"
 else if (ProcessName="eclipse.exe")
@@ -45,8 +47,13 @@ ResetRecentlyClosed()
   recentlyClosed:=false
 }
 ;alt+Windows+h 上一标签页
-!#h:: SendInput "^+{tab}"
-
+!#h::
+ProcessName:=WinGetProcessName("A")
+if (ProcessName="dopus.exe")
+	SendInput "^{left}"
+else
+	SendInput "^+{tab}"
+return
 ;control+alt+Windows+h 历史记录中的上一页
 ^!#h:: SendInput "!{left}"
 
@@ -66,6 +73,8 @@ if (ProcessName=="devenv.exe") ;在编程环境中是单步进入
 	SendInput "{F11}"
 else if (ProcessName=="eclipse.exe")
 	SendInput "{F11}"
+else if(ProcessName="dopus.exe")
+	SendInput "^{right}"
 else
 	SendInput "^{tab}"
 return
