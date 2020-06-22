@@ -5,7 +5,9 @@ recentlyClosed:=false
 
 ; windows+shift+alt+c 关闭标签或窗口
 #!+c:: ;约从Chrome 53开始，alt+shift+control+c容易被Chrome先捕获，AutoHotKey后捕获UP事件，造成shift粘滞的现象。
-if(recentlyClosed)
+{
+global recentlyClosed
+if (recentlyClosed)
     return
 else
    recentlyClosed:=true
@@ -39,7 +41,7 @@ else if (ProcessName="eclipse.exe")
 	SendInput "{F10}"
 else 
 	WinClose "A"
-return
+}
 
 ResetRecentlyClosed()
 {
@@ -48,17 +50,20 @@ ResetRecentlyClosed()
 }
 ;alt+Windows+h 上一标签页
 !#h::
+{
 ProcessName:=WinGetProcessName("A")
 if (ProcessName="dopus.exe")
 	SendInput "^{left}"
 else
 	SendInput "^+{tab}"
-return
+}
+
 ;control+alt+Windows+h 历史记录中的上一页
 ^!#h:: SendInput "!{left}"
 
 ;alt+Windows+l 下一标签页
 !#l:: 
+{
 ProcessName:=WinGetProcessName("A")
 
 pid:=WinGetPID("A")
@@ -77,13 +82,14 @@ else if(ProcessName="dopus.exe")
 	SendInput "^{right}"
 else
 	SendInput "^{tab}"
-return
+}
 
 ;control+alt+Windows+l 历史记录中的下一页
 ^!#l:: SendInput "!{right}"
 
 ;windows+contrl+y 复制/获取副本命令
 ^#y UP::
+{
 path:=WinGetProcessPath("A")
 if (EndsWith(path,"BCompare.exe"))
 {
@@ -127,10 +133,11 @@ else if(EndsWith(path,"explorer.exe"))
 }
 else
 	run path
-return
+}
 
 
 ^!F11::
+{
 If WinActive("ahk_exe chrome.exe")
 {
 	send "^I"
@@ -151,7 +158,7 @@ If WinActive("ahk_exe iexplore.exe")
    send "{F12}"
    return
 }
-return
+}
 
 ; #If WinActive("ahk_exe chrome.exe")
 ; ^d::

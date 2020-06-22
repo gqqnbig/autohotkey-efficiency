@@ -12,7 +12,7 @@ BLOCK "StringFileInfo"
 		VALUE "CompanyName", "gqqnbig"
 		VALUE "FileDescription", "利用AutoHotKey提升工作效率"
 		VALUE "FileVersion", "2.0.{build}"
-		VALUE "ProductVersion", "2.0.{build}-a098"
+		VALUE "ProductVersion", "2.0.{build}-a112"
 		VALUE "LegalCopyright", "https://github.com/gqqnbig/autohotkey-efficiency"
 		VALUE "ProductName", "AutoHotKey效率工具"
 	}

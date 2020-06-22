@@ -9,6 +9,7 @@ TraySetIcon("icon.ico")
 
 ; window+control+b 打开B盘
 #^b::
+{
 pid:=ProcessExist("dopus.exe")
 if(pid==0)
     Run "B:\"
@@ -18,10 +19,11 @@ else
     SplitPath fullPath, , folderPath, 
     Run folderPath "\dopusrt.exe  /acmd Go B:\ NEWTAB=findexisting`,tofront"
 }
-return
+}
 
-#If A_Cursor=="IBeam"
+#hotif A_Cursor=="IBeam"
 ^u UP::
+{
 Clipboard:=""
 SendEvent "^c"
 if(ClipWait(1))
@@ -31,9 +33,10 @@ if(ClipWait(1))
 }
 else
 	TrayTip "无法操作", "control+c没有把内容存入剪贴板", 17
-return
+}
 
 ^+u UP::
+{
 Clipboard:=""
 SendEvent "^c"
 if(ClipWait(1))
@@ -43,13 +46,13 @@ if(ClipWait(1))
 }
 else
 	TrayTip "无法操作", "control+c没有把内容存入剪贴板", 17
-return
+}
 
-#IF
+#hotif
 
-#If WinActive("ahk_exe PDFXCview.exe")
+#hotif WinActive("ahk_exe PDFXCview.exe")
 a::+^f
-#If
+#hotif
 
 
 GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic.php?t=9000
