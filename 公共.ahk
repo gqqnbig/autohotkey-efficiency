@@ -12,7 +12,15 @@ if (recentlyClosed)
 else
    recentlyClosed:=true
 SetTimer "ResetRecentlyClosed", -500
-ProcessName:=WinGetProcessName("A")
+try
+{
+	ProcessName:=WinGetProcessName("A")
+}
+catch e
+{
+	TrayTip "无法操作", e.Message, 1
+	return
+}
 winTitle:=WinGetTitle("A") 
 
 pid:=WinGetPID("A")
@@ -41,7 +49,7 @@ else if (ProcessName="BCompare.exe")
 else if(ProcessName = "ShellExperienceHost.exe")
 	SendInput "{Esc}"
 ; explorer如果没有窗口，发送winclose会变成关机，容易误操作。
-else if (ProcessName = "explorer.exe")
+else if (ProcessName="explorer.exe")
 	SendInput "^w"
 else if (ProcessName="eclipse.exe")
 	SendInput "{F10}"
@@ -57,7 +65,15 @@ ResetRecentlyClosed()
 ;alt+Windows+h 上一标签页
 !#h::
 {
-ProcessName:=WinGetProcessName("A")
+try
+{
+	ProcessName:=WinGetProcessName("A")
+}
+catch e
+{
+	TrayTip "无法操作", e.Message, 1
+	return
+}
 if (ProcessName="dopus.exe")
 	SendInput "^{left}"
 else
@@ -70,7 +86,15 @@ else
 ;alt+Windows+l 下一标签页
 !#l:: 
 {
-ProcessName:=WinGetProcessName("A")
+try
+{
+	ProcessName:=WinGetProcessName("A")
+}
+catch e
+{
+	TrayTip "无法操作", e.Message, 1
+	return
+}
 
 pid:=WinGetPID("A")
 if(A_IsAdmin==false && IsProcessElevated(pid))
