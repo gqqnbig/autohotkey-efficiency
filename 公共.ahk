@@ -37,6 +37,12 @@ else if (ProcessName="dopus.exe")
 	SendInput "^w"
 else if (ProcessName="BCompare.exe")
 	SendInput "^w"
+; 向ShellExperienceHost.exe发送WinClose会触发关机对话框。
+else if(ProcessName = "ShellExperienceHost.exe")
+	SendInput "{Esc}"
+; explorer如果没有窗口，发送winclose会变成关机，容易误操作。
+else if (ProcessName = "explorer.exe")
+	SendInput "^w"
 else if (ProcessName="eclipse.exe")
 	SendInput "{F10}"
 else 
