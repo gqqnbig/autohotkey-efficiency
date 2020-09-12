@@ -131,7 +131,7 @@ else if (a_cursor="IBeam")
 }
 else if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 {
-	clipboard:=""
+	A_Clipboard:=""
 	SendInput("{F6}")
 	SendEvent "^c"
 	if(!clipwait(1))
@@ -147,13 +147,13 @@ else if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 	}
 
 	SendInput "^t"
-	if(InStr(clipboard, "?")==0)
+	if(InStr(A_Clipboard, "?")==0)
 	{
-		clipboard:= clipboard "?nodup=true"
+		A_Clipboard:= A_Clipboard "?nodup=true"
 	}
 	else
-		clipboard:= clipboard "&nodup=true"
-	SendText clipboard
+		A_Clipboard:= A_Clipboard "&nodup=true"
+	SendText A_Clipboard
 	SendInput "{enter}"
 }
 else if(EndsWith(path,"explorer.exe"))
