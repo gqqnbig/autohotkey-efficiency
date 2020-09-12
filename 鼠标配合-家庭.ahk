@@ -1,8 +1,6 @@
 ﻿#Warn  ; Enable warnings to assist with detecting common errors.
 SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
 
-StringCaseSense "off"
-
 TraySetIcon("icon.ico")
 
 #include 公共.ahk

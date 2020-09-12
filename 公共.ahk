@@ -104,9 +104,9 @@ if(A_IsAdmin==false && IsProcessElevated(pid))
 }
 winTitle:=WinGetTitle("A")
 
-if (ProcessName=="devenv.exe") ;在编程环境中是单步进入
+if (ProcessName="devenv.exe") ;在编程环境中是单步进入
 	SendInput "{F11}"
-else if (ProcessName=="eclipse.exe")
+else if (ProcessName="eclipse.exe")
 	SendInput "{F11}"
 else if(ProcessName="dopus.exe")
 	SendInput "^{right}"
