@@ -218,7 +218,7 @@ IsProcessElevated(vPID)
 	hToken:=0
 	if !(DllCall("advapi32\OpenProcessToken", "Ptr",hProc, "UInt",0x8, "PtrP",hToken))
 	{
-		DllCall("kernel32\CloseHandle", Ptr,hProc)
+		DllCall("kernel32\CloseHandle", "Ptr",hProc)
 		return -1
 	}
 	;TokenElevation := 20
