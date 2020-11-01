@@ -48,8 +48,15 @@ else
 
 #hotif
 
-#hotif WinActive("ahk_exe PDFXCview.exe")
+#hotif WinActive("ahk_exe PDFXCview.exe") && InStr(ControlGetClassNN(ControlGetFocus("A")), "Edit")==0
+; DSUI:CmdEdit2
+; Edit1
 a::+^f
+
+j::down
+
+k::up
+
 #hotif
 
 
