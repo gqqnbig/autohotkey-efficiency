@@ -59,6 +59,10 @@ k::up
 
 #hotif
 
+;ctrl+g 用google搜索剪贴板关键词
+^g::run "https://www.google.com/search?q=" . A_Clipboard
+
+
 
 GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic.php?t=9000
 {
