@@ -17,8 +17,8 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 	{
 		SendInput "^c"
 		sleep 30
-		if(FileExist(Clipboard))
-			run(vsPath " /edit " Clipboard)
+		if(FileExist(A_Clipboard))
+			run(vsPath " /edit " A_Clipboard)
 		else
 			SoundBeep
 	}
@@ -26,9 +26,9 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 	{
 		if(ProcessName="iexplore.exe")
 		{
-			Clipboard:=ControlGetText("Edit1", "A")
-			if(StrLen(Clipboard)==0)
-				Clipboard:=ControlGetText("Edit2", "A")
+			A_Clipboard:=ControlGetText("Edit1", "A")
+			if(StrLen(A_Clipboard)==0)
+				A_Clipboard:=ControlGetText("Edit2", "A")
 		}
 		else
 		{
@@ -40,19 +40,19 @@ if(ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="firefo
 		; 提取相对路径
 
 
-		regP:=RegExMatch(Clipboard, "//((beta|demo|\w\w)\.loanspq\.com|loanspq\.localhost)", matchLength)
+		regP:=RegExMatch(A_Clipboard, "//((beta|demo|\w\w)\.loanspq\.com|loanspq\.localhost)", matchLength)
 		if(regP>0)
 		{
 			filePathIndex:=regP+matchLength.Len(0)
-			filePath:="Website" SubStr(Clipboard, filePathIndex)
+			filePath:="Website" SubStr(A_Clipboard, filePathIndex)
 			Goto("foundPath")
 		}
 
-		regP:=RegExMatch(Clipboard, "//svn\.loanspq.com.+Trunk/LoansPQ2", matchLength)
+		regP:=RegExMatch(A_Clipboard, "//svn\.loanspq.com.+Trunk/LoansPQ2", matchLength)
 		if(regP>0)
 		{
 			filePathIndex:=regP+matchLength.Len(0)
-			filePath:= SubStr(Clipboard, filePathIndex)
+			filePath:= SubStr(A_Clipboard, filePathIndex)
 			Goto("foundPath")
 		}
 		return
@@ -80,7 +80,7 @@ else
 {
 	SendInput "^c"
 	sleep 30
-	partialPath:=Clipboard
+	partialPath:=A_Clipboard
 	
 	p:=InStr(partialPath, "/")
 	if(p==0) ;是自定义控件
@@ -158,7 +158,7 @@ SendInput "!+="
 sleep 30
 SendInput "^c"
 ClipWait 1
-run "WScript.exe `"Go to control definition.vbs`" " Clipboard
+run "WScript.exe `"Go to control definition.vbs`" " A_Clipboard
 return
 #If
 

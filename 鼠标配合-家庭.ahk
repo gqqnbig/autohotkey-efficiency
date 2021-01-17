@@ -22,12 +22,12 @@ else
 #hotif A_Cursor=="IBeam"
 ^u UP::
 {
-Clipboard:=""
+A_Clipboard:=""
 SendEvent "^c"
 if(ClipWait(1))
 {
-	Clipboard:=StrLower(Clipboard)
-	SendText Clipboard
+	A_Clipboard:=StrLower(A_Clipboard)
+	SendText A_Clipboard
 }
 else
 	TrayTip "无法操作", "control+c没有把内容存入剪贴板", 17
@@ -35,12 +35,12 @@ else
 
 ^+u UP::
 {
-Clipboard:=""
+A_Clipboard:=""
 SendEvent "^c"
 if(ClipWait(1))
 {
-	Clipboard:=StrUpper(Clipboard)
-	SendText Clipboard
+	A_Clipboard:=StrUpper(A_Clipboard)
+	SendText A_Clipboard
 }
 else
 	TrayTip "无法操作", "control+c没有把内容存入剪贴板", 17
