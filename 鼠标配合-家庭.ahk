@@ -59,7 +59,7 @@ k::up
 
 #hotif
 
-#hotif WinActive("ahk_exe chrome.exe")
+#hotif WinActive("ahk_exe chrome.exe") || WinActive("ahk_exe vivaldi.exe")
 ^d::TrayTip "本脚本在Chrome里禁用了Control+d。如果要添加到收藏夹，请使用鼠标。", "屏蔽误操作", 1
 #hotif 
 

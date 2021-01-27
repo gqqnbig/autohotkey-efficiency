@@ -37,7 +37,7 @@ else if (winTitle="F12" && ProcessName="iexplore.exe")
 	SendInput "{F10}"
 else if (InStr(winTitle, "Developer Tool")==1 && ProcessName="chrome.exe")
 	SendInput "{F10}"
-else if (ProcessName="chrome.exe" || ProcessName="iexplore.exe")
+else if (ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="vivaldi.exe")
 	SendInput "^w"
 else if(ProcessName="Lingoes64.exe"|| ProcessName="Lingoes.exe")
 	SendInput "{Esc}"
@@ -129,10 +129,11 @@ else if (a_cursor="IBeam")
 {
 	SendInput "^c"
 }
-else if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
+else if(EndsWith(path, "chrome.exe") || EndsWith(path, "vivaldi.exe")) ;chrome里复制当前标签
 {
 	A_Clipboard:=""
 	SendInput("{F6}")
+	sleep 100
 	SendEvent "^c"
 	if(!clipwait(1))
 	{
@@ -147,6 +148,7 @@ else if(EndsWith(path, "chrome.exe")) ;chrome里复制当前标签
 	}
 
 	SendInput "^t"
+	sleep 100
 	if(InStr(A_Clipboard, "?")==0)
 	{
 		A_Clipboard:= A_Clipboard "?nodup=true"
