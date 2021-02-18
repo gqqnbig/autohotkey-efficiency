@@ -59,6 +59,11 @@ k::up
 
 #hotif
 
+#hotif WinActive("ahk_exe chrome.exe")
+^d::TrayTip "本脚本在Chrome里禁用了Control+d。如果要添加到收藏夹，请使用鼠标。", "屏蔽误操作", 1
+#hotif 
+
+
 ;ctrl+g 用google搜索剪贴板关键词
 ^g::run "https://www.google.com/search?q=" . A_Clipboard
 

@@ -190,12 +190,6 @@ If WinActive("ahk_exe iexplore.exe")
 }
 }
 
-; #If WinActive("ahk_exe chrome.exe")
-; ^d::
-; TrayTip "本脚本在Chrome里禁用了Control+d。如果要添加到收藏夹，请使用鼠标。", "屏蔽误操作", 1
-; return
-; #If 
-
 
 ; 如果longText以value结尾，则返回1；否则返回0。
 EndsWith(longText, value)
