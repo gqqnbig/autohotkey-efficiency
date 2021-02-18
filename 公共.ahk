@@ -53,6 +53,10 @@ else if (ProcessName="explorer.exe")
 	SendInput "^w"
 else if (ProcessName="eclipse.exe")
 	SendInput "{F10}"
+else if (ProcessName="vmplayer.exe")
+{
+	TrayTip "为防止误操作，不关闭VMWare窗口"
+}
 else 
 	WinClose "A"
 }
