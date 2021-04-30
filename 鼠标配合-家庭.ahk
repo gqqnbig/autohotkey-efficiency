@@ -19,7 +19,7 @@ else
 }
 }
 
-#hotif A_Cursor=="IBeam"
+#hotif A_Cursor=="IBeam" && !WinActive("ahk_exe putty.exe")
 ^u UP::
 {
 A_Clipboard:=""
