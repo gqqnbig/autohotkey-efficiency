@@ -16,7 +16,7 @@ try
 {
 	ProcessName:=WinGetProcessName("A")
 }
-catch e
+catch as e
 {
 	TrayTip "无法操作", e.Message, 1
 	return
@@ -73,7 +73,7 @@ try
 {
 	ProcessName:=WinGetProcessName("A")
 }
-catch e
+catch as e
 {
 	TrayTip "无法操作", e.Message, 1
 	return
@@ -94,7 +94,7 @@ try
 {
 	ProcessName:=WinGetProcessName("A")
 }
-catch e
+catch as e
 {
 	TrayTip "无法操作", e.Message, 1
 	return
