@@ -14,7 +14,7 @@ if(pid==0)
 else
 {
     fullPath := GetModuleFileNameEx(pid)
-    SplitPath fullPath, , folderPath, 
+    SplitPath fullPath, , &folderPath
     Run folderPath "\dopusrt.exe  /acmd Go B:\ NEWTAB=findexisting`,tofront"
 }
 }
@@ -78,7 +78,7 @@ GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic
       return
 
    name_size:= 255
-   VarSetStrCapacity( name, name_size )
+   VarSetStrCapacity( &name, name_size )
 
    result := DllCall( "psapi.dll\GetModuleFileNameExW", "uint", h_process, "uint", 0, "str", name, "uint", name_size )
 
