@@ -64,8 +64,10 @@ k::up
 #hotif 
 
 
+#hotif ! WinActive("ahk_exe putty.exe")
 ;ctrl+g 用google搜索剪贴板关键词
 ^g::run "https://www.google.com/search?q=" . A_Clipboard
+#hotif
 
 
 
