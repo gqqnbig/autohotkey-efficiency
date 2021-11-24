@@ -125,12 +125,12 @@ else if(EndsWith(path, "chrome.exe") || EndsWith(path, "vivaldi.exe")) ;chrome�
 	SendInput("{F6}")
 	sleep 100
 	SendEvent "^c"
-	if(!clipwait(1))
+	if(!clipwait(1) || A_Clipboard == "")
 	{
 		TrayTip "快捷键错误", "F6没有获取到标签页地址", 1
 		SendInput("!d")
 		SendEvent "^c"
-		if(!clipwait(1))
+		if(!clipwait(1) || A_Clipboard == "")
 		{
 			TrayTip "快捷键错误", "alt+d没有获取到标签页地址", 1
 			return
