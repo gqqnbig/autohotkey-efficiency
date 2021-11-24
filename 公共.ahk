@@ -1,17 +1,9 @@
 ﻿SetKeyDelay 30
 
 
-recentlyClosed:=false
-
 ; windows+shift+alt+c 关闭标签或窗口
 #!+c:: ;约从Chrome 53开始，alt+shift+control+c容易被Chrome先捕获，AutoHotKey后捕获UP事件，造成shift粘滞的现象。
 {
-global recentlyClosed
-if (recentlyClosed)
-    return
-else
-   recentlyClosed:=true
-SetTimer "ResetRecentlyClosed", -500
 try
 {
 	ProcessName:=WinGetProcessName("A")
@@ -59,12 +51,6 @@ else if (ProcessName="vmplayer.exe")
 }
 else 
 	WinClose "A"
-}
-
-ResetRecentlyClosed()
-{
-  global recentlyClosed
-  recentlyClosed:=false
 }
 ;alt+Windows+h 上一标签页
 !#h::
