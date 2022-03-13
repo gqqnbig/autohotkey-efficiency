@@ -29,7 +29,7 @@ else if (winTitle="F12" && ProcessName="iexplore.exe")
 	SendInput "{F10}"
 else if (InStr(winTitle, "Developer Tool")==1 && ProcessName="chrome.exe")
 	SendInput "{F10}"
-else if (ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="vivaldi.exe")
+else if (ProcessName="chrome.exe" || ProcessName="iexplore.exe" || ProcessName="vivaldi.exe" || ProcessName="firefox.exe")
 	SendInput "^w"
 else if(ProcessName="Lingoes64.exe"|| ProcessName="Lingoes.exe")
 	SendInput "{Esc}"
