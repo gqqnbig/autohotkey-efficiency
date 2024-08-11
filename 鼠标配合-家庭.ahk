@@ -16,8 +16,9 @@ else
     fullPath := GetModuleFileNameEx(pid)
     SplitPath fullPath, , &folderPath
     Run folderPath "\dopusrt.exe  /acmd Go B:\ NEWTAB=findexisting`,tofront"
-	sleep 1000
-	WinActivate "B:\ ahk_pid " pid
+	handle:=WinWaitActive("B:\ ahk_pid " pid, , 5)
+	if(handle!=0)
+		WinActivate "ahk_id " handle
 }
 }
 
