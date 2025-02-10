@@ -49,11 +49,7 @@ else
 	TrayTip "无法操作", "control+c没有把内容存入剪贴板", 17
 }
 
-#hotif
-
-#hotif WinActive("ahk_exe PDFXCview.exe") && InStr(ControlGetClassNN(ControlGetFocus("A")), "Edit")==0
-; DSUI:CmdEdit2
-; Edit1
+#hotif WinActive("ahk_exe PDFXEdit.exe") && A_Cursor!="IBeam"
 a::+^f
 
 j::down
