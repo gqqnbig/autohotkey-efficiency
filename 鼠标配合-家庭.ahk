@@ -56,14 +56,21 @@ j::down
 
 k::up
 
-#hotif
+#hotif WinActive("ahk_exe PDFXEdit.exe")
+^!F12 UP:: Send "^g"
+
+^!F11 UP:: Send "^h"
 
 #hotif WinActive("ahk_exe chrome.exe") || WinActive("ahk_exe vivaldi.exe")
 ^d::TrayTip "本脚本在Chrome里禁用了Control+d。如果要添加到收藏夹，请使用鼠标。", "屏蔽误操作", 1
-#hotif 
 
 #hotif WinActive("ahk_exe devenv.exe") 
 $^;:: Send ";{Enter}"
+
+^!F12 UP:: Send "{F12}"
+
+^!F11 UP:: Send "^{F12}"
+
 #hotif 
 
 GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic.php?t=9000
