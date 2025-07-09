@@ -70,6 +70,49 @@ $^;:: Send ";{Enter}"
 
 #hotif 
 
+
+RAlt & g:: {  ; Ctrl+Shift+G as hotkey (you can change it)
+    ; Step 1: Copy selected text
+	A_Clipboard := "" ; Empty the clipboard
+    Send("^c")
+    ClipWait(1)
+    if (!A_Clipboard) {
+        ; MsgBox "Clipboard is empty or copy failed."
+		SoundBeep
+        return
+    }
+
+    ; Step 2: Show input box with clipboard content
+    InputText := InputBox("Edit your Google search query:", "Search Google",, A_Clipboard)
+    if InputText.Result != "OK" || InputText.Value == "" {
+        return  ; Cancelled or empty
+    }
+
+    ; Step 3: Search Google
+    query := InputText.Value
+	url:="https://www.google.com/search?q=" . StrReplace(UrlEscape(query, 0x00002000), "+", "%2b")
+	run(url)
+}
+
+; ======================================================================================================================
+; UrlEscape() -> https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-urlescapea
+; URL_DONT_ESCAPE_EXTRA_INFO     = 0x02000000
+; URL_ESCAPE_SPACES_ONLY         = 0x04000000
+; URL_ESCAPE_PERCENT             = 0x00001000
+; URL_ESCAPE_SEGMENT_ONLY        = 0x00002000
+; URL_ESCAPE_AS_UTF8             = 0x00040000 (Win 7+)
+; URL_ESCAPE_ASCII_URI_COMPONENT = 0x00080000 (Win 8+)
+; ======================================================================================================================
+UrlEscape(Url, Flags := 0) {
+   local CC := 1024
+	local Esc:=""
+	VarSetStrCapacity( &Esc, CC )
+   DllCall("Shlwapi.dll\UrlEscape", "Str", Url, "Str", Esc, "UIntP", CC, "UInt", Flags, "UInt")
+	return Esc
+}
+
+
+
 GetModuleFileNameEx( p_pid ) ; by shimanov -  www.autohotkey.com/forum/viewtopic.php?t=9000
 {
    local h_process, name_size, result, name
