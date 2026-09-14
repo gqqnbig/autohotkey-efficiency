@@ -107,6 +107,18 @@ else
 ;control+alt+Windows+l 历史记录中的下一页
 ^!#l:: SendInput "!{right}"
 
+^#x UP::
+{
+path:=WinGetProcessPath("A")
+
+if (EndsWith(path,"PDFXEdit.exe"))
+{
+	SendInput "^g"
+}
+else
+	SendInput "^o"
+}
+
 ;windows+contrl+y 复制/获取副本命令
 ^#y UP::
 {
@@ -152,6 +164,10 @@ else if(EndsWith(path,"explorer.exe"))
 {
 	sleep 50
 	SendInput "^n"
+}
+else if(EndsWith(path, "PDFXEdit.exe"))
+{
+	SendInput "^h"
 }
 else
 	run path
