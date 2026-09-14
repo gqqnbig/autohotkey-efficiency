@@ -119,7 +119,7 @@ else if (a_cursor="IBeam")
 {
 	SendInput "^c"
 }
-else if(EndsWith(path, "chrome.exe") || EndsWith(path, "vivaldi.exe")) ;chrome里复制当前标签
+else if(EndsWith(path, "chrome.exe") || EndsWith(path, "firefox.exe")) ;chrome里复制当前标签
 {
 	A_Clipboard:=""
 	SendInput("{F6}")
